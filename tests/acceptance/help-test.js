@@ -174,6 +174,7 @@ ember serve \u001b[36m<options...>\u001b[39m' + EOL + '\
   \u001b[36m--ssl\u001b[39m \u001b[36m(Boolean)\u001b[39m \u001b[36m(Default: false)\u001b[39m' + EOL + '\
   \u001b[36m--ssl-key\u001b[39m \u001b[36m(String)\u001b[39m \u001b[36m(Default: ssl/server.key)\u001b[39m' + EOL + '\
   \u001b[36m--ssl-cert\u001b[39m \u001b[36m(String)\u001b[39m \u001b[36m(Default: ssl/server.crt)\u001b[39m' + EOL + '\
+  \u001b[36m--express\u001b[39m \u001b[36m(Boolean)\u001b[39m \u001b[36m(Default: true)\u001b[39m Serve files with express' + EOL + '\
 ' + EOL + '\
 ember test \u001b[36m<options...>\u001b[39m' + EOL + '\
   Runs your app\'s test suite.' + EOL + '\
@@ -1047,6 +1048,13 @@ ember version \u001b[36m<options...>\u001b[39m' + EOL + '\
               name: 'ssl-cert',
               default: 'ssl/server.crt',
               key: 'sslCert',
+              required: false
+            },
+            {
+              name: 'express',
+              key: 'express',
+              default: true,
+              description: 'Serve files with express',
               required: false
             }
           ],

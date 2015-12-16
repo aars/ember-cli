@@ -87,6 +87,31 @@ describe('livereload-server', function() {
         expect(ui.output).to.equal('Livereload server on http://127.0.0.1:1337' + EOL);
       });
     });
+
+    it('starts without express server', function () {
+      ui = new MockUI();
+      watcher = new MockWatcher();
+
+      var subjectWithoutExpress = new LiveReloadServer({
+        ui: ui,
+        watcher: watcher,
+        analytics: { trackError: function() { } },
+        project: {
+          liveReloadFilterPatterns: [],
+          root: '/home/user/my-project'
+        }
+      });
+
+      return subjectWithoutExpress.start({
+        liveReloadPort: 1337,
+        liveReloadHost: 'localhost',
+        liveReload: true
+      }).then(function() {
+        expect(ui.output).to.equal('Livereload server on http://localhost:1337' + EOL);
+      }).finally(function () {
+        subjectWithoutExpress._liveReloadServer.close();
+      });
+    });
   });
 
   describe('start with https', function() {

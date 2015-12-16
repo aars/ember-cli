@@ -190,4 +190,26 @@ describe('serve command', function() {
       expect(ops.host).to.equal('hostname', 'has correct hostname');
     });
   });
+
+  it('has correct default express flag', function () {
+    return command.validateAndRun().then(function () {
+      var serveRun = tasks.Serve.prototype.run;
+      var ops = serveRun.calledWith[0][0];
+
+      expect(serveRun.called).to.equal(1, 'expected run to be called once');
+      expect(ops.express).to.equal(true, 'express enabled by default');
+    });
+  });
+
+  it('has correct express flag', function () {
+    return command.validateAndRun([
+      '--express', 'false'
+    ]).then(function () {
+      var serveRun = tasks.Serve.prototype.run;
+      var ops = serveRun.calledWith[0][0];
+
+      expect(serveRun.called).to.equal(1, 'expected run to be called once');
+      expect(ops.express).to.equal(false, 'express disabled');
+    });
+  });
 });
